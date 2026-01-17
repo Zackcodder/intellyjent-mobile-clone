@@ -1,0 +1,2 @@
+/Users/fataisalami/Projects/Flutter/intellyjent-mobile-clone/android/app/.cxx/Debug/6i1dt701/x86/CMakeFiles/edit_cache.dir
+/Users/fataisalami/Projects/Flutter/intellyjent-mobile-clone/android/app/.cxx/Debug/6i1dt701/x86/CMakeFiles/rebuild_cache.dir
