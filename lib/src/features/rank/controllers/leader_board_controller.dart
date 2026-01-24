@@ -15,6 +15,14 @@ class LeaderBoardController extends GetxController {
     data(data.value.reversed.toList());
     pageController(Pagination(perPage: 10, objects: data.value));
     pageObject(pageController.value!.currentPageObject());
+
+    // Listen to changes in selectedGem and refresh data when it changes
+    final ProfilePageController profileController = Get.find();
+    ever(profileController.selectedGem, (_) async {
+      print('Game mode changed, refreshing leaderboard data');
+      await refreshData();
+    });
+
     super.onInit();
   }
 
@@ -32,7 +40,8 @@ class LeaderBoardController extends GetxController {
     final ProfilePageController profileController = Get.find();
     String leaderboardPath;
     print('getting all leaders3');
-    print('getting all leaders2 - ${profileController.selectedGem.value.name.toLowerCase()}');
+    print(
+        'getting all leaders2 - ${profileController.selectedGem.value.name.toLowerCase()}');
 
     switch (profileController.selectedGem.value.name.toLowerCase()) {
       case 'ruby':

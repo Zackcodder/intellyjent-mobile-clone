@@ -9,10 +9,13 @@ class HttpHelper extends GetConnect {
 
   @override
   String get baseUrl => "https://intellyjent.com/api/v1/";
+
+  ///https://intellyjent.com
+  ///https://intellyjent.com/tellyigltd_1278
   @override
   void onInit() {
     super.onInit();
-    httpClient.baseUrl = "https://intellyjent.com/";
+    httpClient.baseUrl = "https://intellyjent.com/api/v1/";
     httpClient.addRequestModifier<dynamic>((request) async {
       request.headers["content-type"] = 'application/json';
       request.headers["Accept"] = 'application/json';
@@ -274,50 +277,46 @@ class HttpHelper extends GetConnect {
   //   }
   // }
 
- 
+  Future<HttpResponse> postRequestStatusResponse(String url,
+      {Map<String, dynamic>? body, Converter? converter}) async {
+    try {
+      var res = await post(url, body,
+              headers: UserData.token == null
+                  ? {}
+                  : {"Authorization": "Token ${UserData.token}"})
+          .timeout(
+        const Duration(seconds: 60),
+      );
 
-Future<HttpResponse> postRequestStatusResponse(String url,
-    {Map<String, dynamic>? body, Converter? converter}) async {
-  try {
-    var res = await post(url, body,
-        headers: UserData.token == null
-            ? {}
-            : {"Authorization": "Token ${UserData.token}"})
-        .timeout(
-      const Duration(seconds: 60),
-    );
+      if (kDebugMode) print('Raw response: ${res.body}');
 
-    if (kDebugMode) print('Raw response: ${res.body}');
-
-    if (res.body == null &&
-        !(res.statusCode == 200 ||
-            res.statusCode == 201 ||
-            res.statusCode == 204)) {
-      throw Exception(["Response body returned null"]);
-    }
-
-    // Decode only if it's a string
-    final decodedBody = res.body is String ? jsonDecode(res.body) : res.body;
-
-    print('Decoded body: $decodedBody');
-    print('Status code: ${res.statusCode}');
-
-    if (res.statusCode! >= 200 && res.statusCode! <= 205) {
-      HttpResponse response = SuccessResponse(result: decodedBody);
-      if (converter != null) {
-        return (response as SuccessResponse).withConverter(converter);
+      if (res.body == null &&
+          !(res.statusCode == 200 ||
+              res.statusCode == 201 ||
+              res.statusCode == 204)) {
+        throw Exception(["Response body returned null"]);
       }
-      return response;
+
+      // Decode only if it's a string
+      final decodedBody = res.body is String ? jsonDecode(res.body) : res.body;
+
+      print('Decoded body: $decodedBody');
+      print('Status code: ${res.statusCode}');
+
+      if (res.statusCode! >= 200 && res.statusCode! <= 205) {
+        HttpResponse response = SuccessResponse(result: decodedBody);
+        if (converter != null) {
+          return (response as SuccessResponse).withConverter(converter);
+        }
+        return response;
+      }
+
+      return ErrorResponse.fromJson(decodedBody);
+    } catch (e) {
+      print('Exception occurred: $e');
+      return ErrorResponse(message: e.toString());
     }
-
-    return ErrorResponse.fromJson(decodedBody);
-  } catch (e) {
-    print('Exception occurred: $e');
-    return ErrorResponse(message: e.toString());
   }
-}
-
-
 
   Future postRequestQuizQuestions(String url,
       {Map<String, dynamic>? body, Converter? converter}) async {

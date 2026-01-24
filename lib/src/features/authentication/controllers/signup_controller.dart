@@ -147,65 +147,69 @@ class SignUpController extends GetxController {
 
   ///testing
   Future<void> submit(BuildContext context) async {
-  print('calling the signup function');
-  final isConnected = await InternetConnectionChecker().hasConnection;
+    print('calling the signup function');
+    final isConnected = await InternetConnectionChecker().hasConnection;
 
-  if (!isConnected) {
-    Fluttertoast.showToast(
-      msg: 'No Internet Connection',
-      backgroundColor: AppColor.appColor,
-      textColor: AppColor.white,
+    if (!isConnected) {
+      Fluttertoast.showToast(
+        msg: 'No Internet Connection',
+        backgroundColor: AppColor.appColor,
+        textColor: AppColor.white,
+      );
+      return;
+    }
+
+    final response = await HttpHelper.instance.signupPostRequestNoAuth(
+      "accounts/sign-up/",
+      body: buildSignUpBody(),
     );
-    return;
+
+    print('This is the value from signup controller $response');
+    print("Formatted DOB: ${formatDate(dob.value)}");
+
+    if (response.status) {
+      // ✅ Success Case
+      Map<String, dynamic> newUserData = (response as SuccessResponse).result;
+
+      // final newUserData = (response as SuccessResponse).result;
+
+      // ✅ Show success toast
+      showFeedbackToast(context, newUserData['detail'] ?? "Signup successful",
+          type: ToastType.success);
+
+      // Proceed to OTP screen
+      // UserData.updateAll(newUserData);
+      UserData.email = emailController.text.trim();
+      UserData.registrationStep = RegistrationStep.otpVerification;
+      // OneSignal.login(UserData.username!);
+      UserData.deviceId = _deviceID;
+
+      Get.to(
+        () => OtpScreen(email: emailController.text.trim()),
+        transition: Transition.rightToLeftWithFade,
+      );
+      return;
+    }
+
+    // ❌ Error Case
+    final error = (response as ErrorResponse);
+
+    // Check for specific known error
+    if (error.message.contains("A user with this email already exists")) {
+      showFeedbackToast(context, error.message);
+      final controller = Get.put(OtpController());
+      await controller.resendOtp(context, emailController.text.trim());
+      Get.to(() => const Login(), transition: Transition.upToDown);
+      return;
+    }
+
+    // Generic fallback
+    showFeedbackToast(
+        context,
+        error.errors.isEmpty
+            ? error.message
+            : error.errors.first.errorMessage.first);
   }
-
-  final response = await HttpHelper.instance.signupPostRequestNoAuth(
-    "accounts/sign-up/",
-    body: buildSignUpBody(),
-  );
-
-  print('This is the value from signup controller $response');
-  print("Formatted DOB: ${formatDate(dob.value)}");
-
-  if (response.status) {
-    // ✅ Success Case  
-     Map<String, dynamic> newUserData = (response as SuccessResponse).result;
- 
-    // final newUserData = (response as SuccessResponse).result;
-
-    // ✅ Show success toast
-    showFeedbackToast(context, newUserData['detail'] ?? "Signup successful");
-
-    // Proceed to OTP screen
-    // UserData.updateAll(newUserData);
-     UserData.email = emailController.text.trim(); 
-    UserData.registrationStep = RegistrationStep.otpVerification;
-    // OneSignal.login(UserData.username!);
-    UserData.deviceId = _deviceID;
-
-
-    Get.to(
-      () => OtpScreen(email: emailController.text.trim()),
-      transition: Transition.rightToLeftWithFade,
-    );
-    return;
-  }
-
-  // ❌ Error Case
-  final error = (response as ErrorResponse);
-
-  // Check for specific known error
-  if (error.message.contains("A user with this email already exists")) {
-    showFeedbackToast(context, error.message);
-    final controller = Get.put(OtpController());
-    await controller.resendOtp(context, emailController.text.trim());
-    Get.to(() => const Login(), transition: Transition.upToDown);
-    return;
-  }
-
-  // Generic fallback
-  showFeedbackToast(context, error.errors.isEmpty ? error.message : error.errors.first.errorMessage.first);
-}
 
   ///
 
@@ -219,7 +223,8 @@ class SignUpController extends GetxController {
           : fullNameController.text.trim().split(" ").first,
       "email": emailController.text.trim(),
       "password": passwordController.text,
-      "date_of_birth":  dob.value.toIso8601String(),
+      "date_of_birth": dob.value.toIso8601String(),
+
       ///formatDate(dob.value),
       "gender": genderGroupValue.value,
       "phone_number":

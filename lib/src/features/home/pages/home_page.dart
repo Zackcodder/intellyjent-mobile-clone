@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             ///game mode title
                             Text(
-                              'GAME MODE',
+                              'Quiz Mode',
                               style: AppTextStyle.bodyMedium(context).copyWith(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 10,
@@ -240,14 +240,16 @@ class HomePage extends StatelessWidget {
                                                     : controller.selectedGem
                                                                 .value.name ==
                                                             'Diamond'
-                                                        ? diamondGameScore.toStringAsFixed(0)
+                                                        ? diamondGameScore
+                                                            .toStringAsFixed(0)
                                                         : controller
                                                                     .selectedGem
                                                                     .value
                                                                     .name ==
                                                                 'Ruby'
                                                             ? rubyGameScore
-                                                        .toStringAsFixed(0)
+                                                                .toStringAsFixed(
+                                                                    0)
                                                             : sapphireGameScore
                                                                 .toStringAsFixed(
                                                                     0),
@@ -258,10 +260,10 @@ class HomePage extends StatelessWidget {
                                                             FontWeight.w700,
                                                         color: AppColor.white,
                                                         fontSize: 18),
-                                              
-                                          ),],
+                                              ),
+                                            ],
                                           ),
-                                          
+
                                           ColumnDivider(
                                               screenHeight: screenHeight,
                                               color: AppColor.white),
@@ -376,22 +378,22 @@ class HomePage extends StatelessWidget {
                       AppSizing.h04,
                       controller.selectedGem.value.name == 'Emerald'
                           ? Text(
-                              '• This game mode costs 2 sillver.',
+                              '• This quiz mode costs 2 sillver.',
                               style: AppTextStyle.bodySmallLight(context),
                             )
                           : controller.selectedGem.value.name == 'Diamond'
                               ? Text(
-                                  '• This game mode costs 4 sillver.',
+                                  '• This quiz mode costs 4 sillver.',
                                   style: AppTextStyle.bodySmallLight(context),
                                 )
                               : controller.selectedGem.value.name == 'Ruby'
                                   ? Text(
-                                      '• This game mode costs 3 sillver.',
+                                      '• This quiz mode costs 3 sillver.',
                                       style:
                                           AppTextStyle.bodySmallLight(context),
                                     )
                                   : Text(
-                                      '• This game mode costs 1 sillver.',
+                                      '• This quiz mode costs 1 sillver.',
                                       style:
                                           AppTextStyle.bodySmallLight(context),
                                     ),

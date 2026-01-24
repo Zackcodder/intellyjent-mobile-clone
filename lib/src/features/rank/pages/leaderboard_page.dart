@@ -14,8 +14,8 @@ class LeaderboardPage extends StatelessWidget {
     // final screenHeight = mediaQuery.size.height;
     final screenWidth = mediaQuery.size.width;
 
-    final controller = Get.put(LeaderBoardController());
     final cnt = Get.put(ProfilePageController());
+    final controller = Get.put(LeaderBoardController());
     print('top leadership page ${controller.dataLastWeek}');
     print('all leadership page ${controller.data}');
 

@@ -1,2 +1,0 @@
-C:/Users/FLK/Documents/personal/intellyjent-mobile-clone/android/app/.cxx/Debug/6r4p6p2a/x86_64/CMakeFiles/edit_cache.dir
-C:/Users/FLK/Documents/personal/intellyjent-mobile-clone/android/app/.cxx/Debug/6r4p6p2a/x86_64/CMakeFiles/rebuild_cache.dir

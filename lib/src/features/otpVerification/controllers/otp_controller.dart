@@ -181,10 +181,12 @@ class OtpController extends GetxController {
   }
 
   Future resendOtp(BuildContext context, String email) async {
+    print('otp resend button pressed');
     timeToResendCode.value = 59;
     _startTimer();
     await HttpHelper.instance.postRequest("accounts/request-verification",
         body: {"email": email}).then((value) {
+      print('otp sent pressed 01 with value res $value');
       if (value.status) {
         print('otp sent');
         print(value);
@@ -196,12 +198,8 @@ class OtpController extends GetxController {
 
       ErrorResponse errors = (value as ErrorResponse);
 
-      showFeedbackToast(
-        context,
-        errors.errors.isEmpty
-            ? errors.message
-            : errors.errors.first.errorMessage.first,
-      );
+      showFeedbackToast(context, 'Opps, an error occured, try again!!!',
+          type: ToastType.success);
     });
   }
 
