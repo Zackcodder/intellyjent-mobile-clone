@@ -225,7 +225,7 @@ class HttpHelper extends GetConnect {
       // ❌ Handle 400+ with "detail"
       if (decodedBody != null && decodedBody.containsKey('detail')) {
         print("Exception caught: ${decodedBody['detail']}");
-        return ErrorResponse(message: decodedBody['detail']);
+        return ErrorResponse.fromJson(decodedBody['detail']);
       }
 
       // ❌ Fallback generic error
@@ -557,6 +557,9 @@ class ErrorResponse extends HttpResponse {
     if (json is List) {
       // The response is a list of error messages
       return ErrorResponse(message: json.join(", "));
+    } else if (json is String) {
+      // The response is a string message
+      return ErrorResponse(message: json);
     } else if (json is Map<String, dynamic>) {
       // The response is a map
       List<HttpError> createErrors = [];

@@ -30,7 +30,7 @@ class _RootState extends State<Root> {
 
     final DarkModeController darkModeController = Get.find();
     final Brightness statusBarIconBrightness =
-    darkModeController.isDarkMode ? Brightness.light : Brightness.dark;
+        darkModeController.isDarkMode ? Brightness.light : Brightness.dark;
 
     // Set initial system UI overlay style
     _updateSystemUIOverlayStyle(statusBarIconBrightness);
@@ -38,11 +38,13 @@ class _RootState extends State<Root> {
     // Observe changes in dark mode and update system UI overlay style
     ever<bool>(darkModeController.isDarkMode.obs, (isDarkMode) {
       final Brightness newIconBrightness =
-      isDarkMode ? Brightness.light : Brightness.dark;
+          isDarkMode ? Brightness.light : Brightness.dark;
       _updateSystemUIOverlayStyle(newIconBrightness);
     });
 
-    OneSignal.login(UserData.username!);
+    if (UserData.username != null) {
+      OneSignal.login(UserData.username!);
+    }
     OneSignal.User.pushSubscription.optIn();
   }
 
@@ -56,6 +58,7 @@ class _RootState extends State<Root> {
       ),
     );
   }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -72,7 +75,7 @@ class _RootState extends State<Root> {
         return BottomIconType.topUp;
       case 3:
         return BottomIconType.learn;
-        //comment
+      //comment
       case 4:
         return BottomIconType.account;
       default:
@@ -88,6 +91,7 @@ class _RootState extends State<Root> {
       curve: Curves.easeIn,
     );
   }
+
   final GlobalKey<ScaffoldState> _rootScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -122,33 +126,43 @@ class _RootState extends State<Root> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomAnimatedIcon(
-                image: _selectedIcon == BottomIconType.quiz ? Assets.assetsQuizSelected : Assets.assetsQuizUnselected,
+                image: _selectedIcon == BottomIconType.quiz
+                    ? Assets.assetsQuizSelected
+                    : Assets.assetsQuizUnselected,
                 onPressed: () => _onIconTapped(BottomIconType.quiz, 0),
                 isSelected: _selectedIcon == BottomIconType.quiz,
                 title: 'Quiz',
               ),
               CustomAnimatedIcon(
-                image: _selectedIcon == BottomIconType.leaderboard ? Assets.assetsRankingSelected :  Assets.assetsRanking,
+                image: _selectedIcon == BottomIconType.leaderboard
+                    ? Assets.assetsRankingSelected
+                    : Assets.assetsRanking,
                 // width: 18,
                 onPressed: () => _onIconTapped(BottomIconType.leaderboard, 1),
                 isSelected: _selectedIcon == BottomIconType.leaderboard,
                 title: 'Leaderboard',
               ),
               CustomAnimatedIcon(
-                image: _selectedIcon == BottomIconType.topUp ? Assets.assetsMoneysSelected : Assets.assetsMoneys,
+                image: _selectedIcon == BottomIconType.topUp
+                    ? Assets.assetsMoneysSelected
+                    : Assets.assetsMoneys,
                 // width: 16.782,
                 onPressed: () => _onIconTapped(BottomIconType.topUp, 2),
                 isSelected: _selectedIcon == BottomIconType.topUp,
                 title: 'Top-Up',
               ),
               CustomAnimatedIcon(
-                image: _selectedIcon == BottomIconType.learn ? Assets.assetsBookDark : Assets.assetsBook,
+                image: _selectedIcon == BottomIconType.learn
+                    ? Assets.assetsBookDark
+                    : Assets.assetsBook,
                 onPressed: () => _onIconTapped(BottomIconType.learn, 3),
                 isSelected: _selectedIcon == BottomIconType.learn,
                 title: 'Learn',
               ),
               CustomAnimatedIcon(
-                image: _selectedIcon == BottomIconType.account ? Assets.assetsProfileSelected : Assets.assetsProfile,
+                image: _selectedIcon == BottomIconType.account
+                    ? Assets.assetsProfileSelected
+                    : Assets.assetsProfile,
                 onPressed: () => _onIconTapped(BottomIconType.account, 4),
                 isSelected: _selectedIcon == BottomIconType.account,
                 title: 'Account',
@@ -173,7 +187,6 @@ class _RootState extends State<Root> {
             //comment
             const LearnCategoryListPage(),
             const ProfilePage(),
-
           ],
         ),
       ),

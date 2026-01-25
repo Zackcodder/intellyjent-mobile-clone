@@ -195,8 +195,13 @@ class SignUpController extends GetxController {
     final error = (response as ErrorResponse);
 
     // Check for specific known error
-    if (error.message.contains("A user with this email already exists")) {
-      showFeedbackToast(context, error.message);
+    bool isEmailExists = error.message
+            .contains("A user with this email already exists") ||
+        error.errors.any((e) => e.errorMessage.any(
+            (msg) => msg.contains("A user with this email already exists")));
+
+    if (isEmailExists) {
+      showFeedbackToast(context, "A user with this email already exists");
       final controller = Get.put(OtpController());
       await controller.resendOtp(context, emailController.text.trim());
       Get.to(() => const Login(), transition: Transition.upToDown);
@@ -204,11 +209,14 @@ class SignUpController extends GetxController {
     }
 
     // Generic fallback
-    showFeedbackToast(
-        context,
-        error.errors.isEmpty
-            ? error.message
-            : error.errors.first.errorMessage.first);
+    String errorMessage;
+    if (error.errors.isNotEmpty) {
+      errorMessage =
+          error.errors.map((e) => e.errorMessage.join(', ')).join('; ');
+    } else {
+      errorMessage = error.message;
+    }
+    showFeedbackToast(context, errorMessage);
   }
 
   ///

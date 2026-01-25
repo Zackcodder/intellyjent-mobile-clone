@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
       canPop: validateRoute(),
       onPopInvoked: (value) async {
         if (!value) {
-          Get.off(()=> const Login());
+          Get.off(() => const Login());
           UserData.registrationStep = null;
         }
       },
@@ -40,6 +40,7 @@ class _SignUpState extends State<SignUp> {
           children: [
             ///blue background image
             const AuthBackgroundWidget(),
+
             /// body
             Stack(
               children: [
@@ -47,12 +48,13 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     ///space at the top abouve the lady image
                     const Spacer(),
+
                     ///sign in form n logo image
                     Expanded(
                         flex: 3,
                         child: Container(
                           width: double.maxFinite,
-                          padding: screenWidth <800
+                          padding: screenWidth < 800
                               ? const EdgeInsets.symmetric(horizontal: 20)
                               : const EdgeInsets.symmetric(horizontal: 40),
                           decoration: BoxDecoration(
@@ -71,6 +73,7 @@ class _SignUpState extends State<SignUp> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     AppSizing.h40,
+
                                     ///app logo
                                     SvgPicture.asset(
                                       Assets.assetsBlueLogo,
@@ -86,6 +89,7 @@ class _SignUpState extends State<SignUp> {
                                             .copyWith(
                                                 fontWeight: FontWeight.normal)),
                                     AppSizing.h20,
+
                                     ///form list
                                     Obx(() => Form(
                                         key: _formKey,
@@ -117,6 +121,7 @@ class _SignUpState extends State<SignUp> {
                                                   Assets.assetsPersonal),
                                             ),
                                             AppSizing.h20,
+
                                             ///first and last name
                                             CustomInputField(
                                               controller: signUpController
@@ -126,6 +131,7 @@ class _SignUpState extends State<SignUp> {
                                                   "First Name and Last Name",
                                             ),
                                             AppSizing.h20,
+
                                             ///gender dropdown
                                             Align(
                                                 alignment: Alignment.centerLeft,
@@ -134,6 +140,7 @@ class _SignUpState extends State<SignUp> {
                                                         .genderGroupValue
                                                         .value)),
                                             AppSizing.h20,
+
                                             ///country dropdown
                                             CustomInputField(
                                               controller: signUpController
@@ -152,10 +159,17 @@ class _SignUpState extends State<SignUp> {
                                                   : _emojiText(signUpController
                                                       .selectedCountry.value!),
                                               suffixIcon: SvgPicture.asset(
-                                                  Assets.assetsArrowDown,
-                                                width: MediaQuery.of(context).size.width < 800 ? null : 100,),
+                                                Assets.assetsArrowDown,
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width <
+                                                        800
+                                                    ? null
+                                                    : 100,
+                                              ),
                                             ),
                                             AppSizing.h20,
+
                                             ///phone number
                                             CustomInputField(
                                                 controller: signUpController
@@ -169,6 +183,10 @@ class _SignUpState extends State<SignUp> {
                                                 validator: (value) {
                                                   if (value.length > 13) {
                                                     return "Invalid phone number";
+                                                  } else if (value
+                                                      .toString()
+                                                      .isEmpty) {
+                                                    return "phone number cannot be empty";
                                                   }
                                                   return null;
                                                 },
@@ -185,8 +203,8 @@ class _SignUpState extends State<SignUp> {
                                                                 context,
                                                                 forPhone: true),
                                                         child: SvgPicture.asset(
-                                                            Assets.assetsCall,
-                                                          ))
+                                                          Assets.assetsCall,
+                                                        ))
                                                     : Text(
                                                         "+${signUpController.selectedCountry.value?.phoneCode ?? "--"}",
                                                         style: AppTextStyle
@@ -196,6 +214,7 @@ class _SignUpState extends State<SignUp> {
                                                                 fontSize: 16),
                                                       )),
                                             AppSizing.h20,
+
                                             ///dob
                                             CustomInputField(
                                               controller: signUpController
@@ -226,10 +245,17 @@ class _SignUpState extends State<SignUp> {
                                               hintText:
                                                   "Select your Date of birth",
                                               suffixIcon: SvgPicture.asset(
-                                                  Assets.assetsCalender,
-                                                width: MediaQuery.of(context).size.width < 800 ? null : 100,),
+                                                Assets.assetsCalender,
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width <
+                                                        800
+                                                    ? null
+                                                    : 100,
+                                              ),
                                             ),
                                             AppSizing.h20,
+
                                             ///refferal code
                                             Column(
                                               crossAxisAlignment:
@@ -239,16 +265,25 @@ class _SignUpState extends State<SignUp> {
                                                 CustomInputField(
                                                     controller: signUpController
                                                         .referralCodeController,
-                                                    fieldName: "Referral Code (Optional)",
+                                                    fieldName:
+                                                        "Referral Code (Optional)",
                                                     validator: (value) {
                                                       return null;
                                                     },
                                                     hintText: "Enter code",
                                                     prefixIcon:
-                                                        SvgPicture.asset(Assets
-                                                            .assetsUserAdd,
-                                                          width: MediaQuery.of(context).size.width < 800 ? null : 100,)),
+                                                        SvgPicture.asset(
+                                                      Assets.assetsUserAdd,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  800
+                                                              ? null
+                                                              : 100,
+                                                    )),
                                                 AppSizing.h07,
+
                                                 ///referral code hint
                                                 Text(
                                                   "Enter the code of the person who referred you (optional)",
@@ -262,6 +297,7 @@ class _SignUpState extends State<SignUp> {
                                               ],
                                             ),
                                             AppSizing.h20,
+
                                             ///password
                                             Column(
                                               crossAxisAlignment:
@@ -278,6 +314,33 @@ class _SignUpState extends State<SignUp> {
                                                     LengthLimitingTextInputFormatter(
                                                         25)
                                                   ],
+                                                  validator: (value) {
+                                                    if (value
+                                                        .toString()
+                                                        .isEmpty) {
+                                                      return "Password cannot be empty";
+                                                    }
+                                                    if (value.length < 8) {
+                                                      return "Password must be at least 8 characters long";
+                                                    }
+                                                    // Check for at least one capital letter
+                                                    if (!RegExp(r'[A-Z]')
+                                                        .hasMatch(value)) {
+                                                      return "Password must contain at least one capital letter";
+                                                    }
+                                                    // Check for at least one number
+                                                    if (!RegExp(r'[0-9]')
+                                                        .hasMatch(value)) {
+                                                      return "Password must contain at least one number";
+                                                    }
+                                                    // Check for at least one symbol
+                                                    if (!RegExp(
+                                                            r'[!@#$%^&*(),.?":{}|<>]')
+                                                        .hasMatch(value)) {
+                                                      return "Password must contain at least one special character";
+                                                    }
+                                                    return null;
+                                                  },
                                                 ),
                                                 AppSizing.h07,
                                                 Text(
@@ -294,6 +357,7 @@ class _SignUpState extends State<SignUp> {
                                           ],
                                         ))),
                                     AppSizing.h56,
+
                                     ///signup button
                                     ButtonWidget(
                                         buttonText: 'Sign Up',
@@ -306,6 +370,10 @@ class _SignUpState extends State<SignUp> {
                                                 AppColor.appColor),
                                         onPressed: () async {
                                           if (_formKey.currentState != null &&
+                                              signUpController
+                                                  .phoneNumberController
+                                                  .text
+                                                  .isNotEmpty &&
                                               _formKey.currentState!
                                                   .validate()) {
                                             await signUpController
@@ -322,15 +390,21 @@ class _SignUpState extends State<SignUp> {
                                             TextSpan(
                                                 text:
                                                     "By signing up you accept our standard ",
-                                          style: AppTextStyle.h4Regular(
-                                              context)
-                                              .copyWith( fontSize: screenWidth < 800 ? 15 : 27)),
+                                                style: AppTextStyle.h4Regular(
+                                                        context)
+                                                    .copyWith(
+                                                        fontSize:
+                                                            screenWidth < 800
+                                                                ? 15
+                                                                : 27)),
                                             TextSpan(
                                                 text: "terms and condition",
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = () {
-                                                    signUpController.launchTc();
-                                                  },
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        signUpController
+                                                            .launchTc();
+                                                      },
                                                 style: AppTextStyle.h4Regular(
                                                         context)
                                                     .copyWith(
@@ -342,32 +416,38 @@ class _SignUpState extends State<SignUp> {
                                                                 Brightness.dark
                                                             ? Colors.white
                                                             : AppColor.appBlack,
-                                                        fontSize: screenWidth < 800 ? 15 : 27,
+                                                        fontSize:
+                                                            screenWidth < 800
+                                                                ? 15
+                                                                : 27,
                                                         fontWeight:
                                                             FontWeight.w400)),
                                             TextSpan(
-                                              text: " and our ",
+                                                text: " and our ",
                                                 style: AppTextStyle.h4Regular(
-                                                context)
-                                                .copyWith(
-                                                decoration:
-                                                TextDecoration
-                                                    .none,
-                                                color: Get.theme
-                                                    .brightness ==
-                                                    Brightness.dark
-                                                    ? Colors.white
-                                                    : AppColor.appBlack,
-                                                fontSize: screenWidth < 800 ? 15 : 27,
-                                                fontWeight:
-                                                FontWeight.w400)
-                                            ),
+                                                        context)
+                                                    .copyWith(
+                                                        decoration:
+                                                            TextDecoration.none,
+                                                        color: Get.theme
+                                                                    .brightness ==
+                                                                Brightness.dark
+                                                            ? Colors.white
+                                                            : AppColor.appBlack,
+                                                        fontSize:
+                                                            screenWidth < 800
+                                                                ? 15
+                                                                : 27,
+                                                        fontWeight:
+                                                            FontWeight.w400)),
                                             TextSpan(
                                                 text: "privacy policy",
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = () {
-                                                    signUpController.launchPp();
-                                                  },
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        signUpController
+                                                            .launchPp();
+                                                      },
                                                 style: AppTextStyle.h4Regular(
                                                         context)
                                                     .copyWith(
@@ -379,7 +459,10 @@ class _SignUpState extends State<SignUp> {
                                                                 Brightness.dark
                                                             ? Colors.white
                                                             : AppColor.appBlack,
-                                                        fontSize: screenWidth < 800 ? 15 : 27,
+                                                        fontSize:
+                                                            screenWidth < 800
+                                                                ? 15
+                                                                : 27,
                                                         fontWeight:
                                                             FontWeight.w400))
                                           ],
@@ -411,22 +494,29 @@ class _SignUpState extends State<SignUp> {
                                         child: RichText(
                                             text: TextSpan(
                                                 children: [
-                                                  TextSpan(
+                                              TextSpan(
                                                   text:
-                                                      "Already have an account? ", style: AppTextStyle.h4Regular(
-                                                  context)
-                                                  .copyWith(
-                                                  decoration:
-                                                  TextDecoration
-                                                      .none,
-                                                  color: Get.theme
-                                                      .brightness ==
-                                                      Brightness.dark
-                                                      ? Colors.white
-                                                      : AppColor.appBlack,
-                                                  fontSize: screenWidth < 800 ? 15 : 27,
-                                                  fontWeight:
-                                                  FontWeight.w400)),
+                                                      "Already have an account? ",
+                                                  style: AppTextStyle
+                                                          .h4Regular(context)
+                                                      .copyWith(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .none,
+                                                          color:
+                                                              Get.theme
+                                                                          .brightness ==
+                                                                      Brightness
+                                                                          .dark
+                                                                  ? Colors.white
+                                                                  : AppColor
+                                                                      .appBlack,
+                                                          fontSize:
+                                                              screenWidth < 800
+                                                                  ? 15
+                                                                  : 27,
+                                                          fontWeight:
+                                                              FontWeight.w400)),
                                               TextSpan(
                                                   text: " Sign in",
                                                   style: AppTextStyle.h4Regular(
@@ -434,7 +524,10 @@ class _SignUpState extends State<SignUp> {
                                                       .copyWith(
                                                           color:
                                                               AppColor.appColor,
-                                                          fontSize: screenWidth < 800 ? 15 : 27,
+                                                          fontSize:
+                                                              screenWidth < 800
+                                                                  ? 15
+                                                                  : 27,
                                                           fontWeight:
                                                               FontWeight.w400))
                                             ],
@@ -454,6 +547,7 @@ class _SignUpState extends State<SignUp> {
                         )),
                   ],
                 ),
+
                 ///lady image
                 Column(
                   children: [

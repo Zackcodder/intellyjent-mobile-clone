@@ -134,7 +134,15 @@ class OtpController extends GetxController {
     } else {
       final error = response as ErrorResponse;
       print("OTP verification failed: $error");
-      showFeedbackToast(context, error.message);
+
+      String errorMessage;
+      if (error.errors.isNotEmpty) {
+        errorMessage =
+            error.errors.map((e) => e.errorMessage.join(', ')).join('; ');
+      } else {
+        errorMessage = error.message;
+      }
+      showFeedbackToast(context, errorMessage);
     }
   }
 
@@ -147,8 +155,14 @@ class OtpController extends GetxController {
       print('user token ${UserData.token}');
       print('user name ${UserData.username}');
       if (value.status) {
-        UserData.username = (value as SuccessResponse).result["username"];
+        UserData.username = (value as SuccessResponse).result["username"] ??
+            usernameController.text.trim();
         print('user name22 ${UserData.username}');
+
+        // Ensure all required user data is set
+        UserData.isVerified = true;
+
+        // Show success dialog
         Get.dialog(
             const Dialog(
                 backgroundColor: Colors.transparent,
@@ -157,7 +171,25 @@ class OtpController extends GetxController {
                 insetPadding: EdgeInsets.symmetric(horizontal: 20),
                 child: PopScope(canPop: false, child: SuccessWidget())),
             barrierDismissible: false);
+
         UserData.registrationStep = null;
+
+        // Auto-navigate to home after 3 seconds as fallback
+        Future.delayed(const Duration(seconds: 3), () {
+          try {
+            if (Get.isDialogOpen ?? false) {
+              Get.back(); // Close the dialog
+            }
+            // Ensure we navigate to Root even if dialog is already closed
+            if (Get.currentRoute != '/root') {
+              Get.offAll(() => const Root());
+            }
+          } catch (e) {
+            // Fallback navigation in case of any errors
+            Get.offAll(() => const Root());
+          }
+        });
+
         return;
       }
       // else {
@@ -171,12 +203,25 @@ class OtpController extends GetxController {
       // }
       ErrorResponse errors = (value as ErrorResponse);
 
-      showFeedbackToast(
-        context,
-        errors.errors.isEmpty
-            ? errors.message
-            : errors.errors.first.errorMessage.first,
-      );
+      String errorMessage;
+      if (errors.errors.isNotEmpty) {
+        // Check for specific username errors
+        String firstError =
+            errors.errors.first.errorMessage.first.toLowerCase();
+        if (firstError.contains('username') &&
+            (firstError.contains('already') ||
+                firstError.contains('exists') ||
+                firstError.contains('taken'))) {
+          errorMessage = "Username already exists, try something different";
+        } else {
+          errorMessage = "Could not create username. Try again";
+        }
+      } else {
+        // Fallback for generic errors
+        errorMessage = "Could not create username. Try again";
+      }
+
+      showFeedbackToast(context, errorMessage, type: ToastType.error);
     });
   }
 
@@ -198,8 +243,14 @@ class OtpController extends GetxController {
 
       ErrorResponse errors = (value as ErrorResponse);
 
-      showFeedbackToast(context, 'Opps, an error occured, try again!!!',
-          type: ToastType.success);
+      String errorMessage;
+      if (errors.errors.isNotEmpty) {
+        errorMessage =
+            errors.errors.map((e) => e.errorMessage.join(', ')).join('; ');
+      } else {
+        errorMessage = errors.message;
+      }
+      showFeedbackToast(context, errorMessage, type: ToastType.error);
     });
   }
 

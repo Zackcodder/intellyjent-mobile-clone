@@ -189,7 +189,7 @@ class HomePage extends StatelessWidget {
                   ),
                   // display for the user points, sillver and position
                   Obx(() {
-                    return ProfilePageController().isLoading.value
+                    return controller.isLoading.value
                         ? PointsFadeShimmer(screenHeight: screenHeight)
                         : Container(
                             height: screenWidth * 0.479,
@@ -407,8 +407,34 @@ class HomePage extends StatelessWidget {
                           const MaterialStatePropertyAll(AppColor.appColor),
                       borderSideColor: Colors.transparent,
                       textColor: AppColor.white,
-                      onPressed: () =>
-                          Get.offAll(() => const QuizQuestionsPage()),
+                      onPressed: () {
+                        if ((controller.userData.value?.points ?? 0) > 0) {
+                          Get.offAll(() => const QuizQuestionsPage());
+                        } else {
+                          Get.dialog(
+                            Dialog(
+                              backgroundColor: Colors.transparent,
+                              surfaceTintColor: Colors.transparent,
+                              clipBehavior: Clip.none,
+                              insetPadding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: PopScope(
+                                canPop: false,
+                                child: AppDialog(
+                                  msg: 'Sorry 😢, you are out of Silver',
+                                  buttonText: 'Top up',
+                                  height: 230,
+                                  onTap: () {
+                                    Get.to(() => const TopUpPage());
+                                  },
+                                  isCancelButton: false,
+                                ),
+                              ),
+                            ),
+                            barrierDismissible: true,
+                          );
+                        }
+                      },
                       buttonText: 'Let\'s do this!',
                       fontSize: 17),
                 ],
