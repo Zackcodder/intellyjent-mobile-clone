@@ -242,7 +242,7 @@ class TransferPage extends StatelessWidget {
                   ),
                   screenHeight < 670 ? AppSizing.h04 : AppSizing.h20,
 
-                  ///i ahev sent the money button
+                  ///i have sent the money button
                   ButtonWidget(
                       buttonText: 'I\'ve sent the money',
                       fontWeight: FontWeight.w400,
@@ -268,10 +268,10 @@ class TransferPage extends StatelessWidget {
                                   },
                                   builder: (context, value) {
                                     // if (value == false && cont.counter == 5)
-                                    if (value == false &&
-                                        cont.counter == 5) {
+                                    if (value == false && cont.counter == 5) {
                                       print('value in user button $value');
-                                      print('value in user button ${cont.transactionSuccessful}');
+                                      print(
+                                          'value in user button ${cont.transactionSuccessful}');
                                       return PopScope(
                                         canPop: false,
                                         child: AppDialog(

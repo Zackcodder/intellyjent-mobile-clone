@@ -2,7 +2,6 @@ import '../../../core/core.dart';
 
 // ignore_for_file: curly_braces_in_flow_control_structures
 
-
 class QuizQuestionsController extends GetxController {
   RxInt currentQuestionIndex = 0.obs;
   RxInt updateScoreCount = 0.obs;
@@ -73,7 +72,7 @@ class QuizQuestionsController extends GetxController {
     try {
       // Use this controller's selectedGem, not the profile controller
       String quizPath;
-    final ProfilePageController profileController = Get.find();
+      final ProfilePageController profileController = Get.find();
       String gemType = profileController.selectedGem.value.name.toLowerCase();
 
       print("Loading quiz for gem type: $gemType"); // Debug print
@@ -115,7 +114,7 @@ class QuizQuestionsController extends GetxController {
 
           final List<String> categories = categorySequence();
           final List<String> difficulties =
-              difficultySequence(181); // you can change total here
+              difficultySequence(39); // you can change total here
 
           int addedCount = 0;
 
@@ -165,27 +164,27 @@ class QuizQuestionsController extends GetxController {
           print('✅ Arranged quiz questions: ${arrangedQuestions.length}');
           startCountdown();
         } else {
-          Get.dialog(
-            Dialog(
-              backgroundColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
-              clipBehavior: Clip.none,
-              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
-              child: PopScope(
-                canPop: false,
-                child: AppDialog(
-                  msg: 'Sorry 😢, you are out of Silver',
-                  buttonText: 'Top up',
-                  height: 230,
-                  onTap: () {
-                    Get.to(() => const TopUpPage());
-                  },
-                  isCancelButton: false,
-                ),
-              ),
-            ),
-            barrierDismissible: true,
-          );
+          // Get.dialog(
+          // Dialog(
+          // backgroundColor: Colors.transparent,
+          // surfaceTintColor: Colors.transparent,
+          // clipBehavior: Clip.none,
+          // insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+          // child: PopScope(
+          // canPop: false,
+          // child: AppDialog(
+          // msg: 'Sorry 😢, you are out of Silver',
+          // buttonText: 'Top up',
+          // height: 230,
+          // onTap: () {
+          // Get.to(() => const TopUpPage());
+          // },
+          // isCancelButton: false,
+          // ),
+          // ),
+          // ),
+          // barrierDismissible: true,
+          // );
         }
       } else {
         print('❌ Error response: $response');
@@ -284,11 +283,11 @@ class QuizQuestionsController extends GetxController {
     while (questionCounter <= totalQuestions) {
       if (questionCounter <= 5) {
         sequence.add('easy');
-      } else if (questionCounter <= 15) {
+      } else if (questionCounter <= 10) {
         sequence.add('moderate');
-      } else if (questionCounter <= 20) {
+      } else if (questionCounter <= 15) {
         sequence.add('easy');
-      } else if (questionCounter <= 30) {
+      } else if (questionCounter <= 20) {
         sequence.add('moderate');
       } else {
         sequence.add('difficult');
@@ -300,7 +299,7 @@ class QuizQuestionsController extends GetxController {
 
   void startCountdown() {
     if (!isQuizOver.value) {
-      countdown.value = const Duration(minutes: 5);
+      countdown.value = const Duration(minutes: 3, seconds: 30);
       print('count down value ${countdown.value}');
       updateCountdown();
     }
@@ -467,7 +466,6 @@ class QuizQuestionsController extends GetxController {
     resetTapped();
   }
 
-
   Future<void> quitQuiz() async {
     print('quit');
     quizResult.value = QuizResult(
@@ -517,7 +515,4 @@ class QuizQuestionsController extends GetxController {
     });
     return true;
   }
-
- 
-
 }

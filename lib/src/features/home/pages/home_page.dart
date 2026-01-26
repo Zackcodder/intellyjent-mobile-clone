@@ -423,11 +423,11 @@ class HomePage extends StatelessWidget {
                                 child: AppDialog(
                                   msg: 'Sorry 😢, you are out of Silver',
                                   buttonText: 'Top up',
-                                  height: 230,
+                                  // height: 231,
                                   onTap: () {
                                     Get.to(() => const TopUpPage());
                                   },
-                                  isCancelButton: false,
+                                  isCancelButton: true,
                                 ),
                               ),
                             ),
