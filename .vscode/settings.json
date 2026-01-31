@@ -1,7 +1,8 @@
 {
-    "yaml.schemaStore.enable": false,
-    "flutterTools.displayGetxContextMenu": true,
-    "flutterTools.displayMobxContextMenu": false,
-    "flutterTools.displayRiverpodContextMenu": false,
-    "flutterTools.displayModularContextMenu": false
+  "yaml.schemaStore.enable": false,
+  "flutterTools.displayGetxContextMenu": true,
+  "flutterTools.displayMobxContextMenu": false,
+  "flutterTools.displayRiverpodContextMenu": false,
+  "flutterTools.displayModularContextMenu": false,
+  "dart.flutterSdkPath": ".fvm/versions/3.38.8"
 }

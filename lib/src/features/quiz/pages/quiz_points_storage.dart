@@ -90,14 +90,14 @@ class ScoreStorage {
         (name.length > 1 ? name.substring(1).toLowerCase() : '');
 
     // Ensure it's one of our valid gem types
-    if (['Emerald', 'Ruby', 'Diamond', 'Sapphire'].contains(name)) {
+    if (['Emerald', 'Ruby', 'Launchpad', 'Sapphire'].contains(name)) {
       return name;
     }
 
     // Handle partial matches
     if (name.startsWith('E')) return 'Emerald';
     if (name.startsWith('R')) return 'Ruby';
-    if (name.startsWith('D')) return 'Diamond';
+    if (name.startsWith('L')) return 'Launchpad';
     if (name.startsWith('S')) return 'Sapphire';
 
     return name; // Return as-is if no match
@@ -110,7 +110,7 @@ class ScoreStorage {
     }
 
     // Get scores for all gem types
-    List<String> gemTypes = ['Emerald', 'Ruby', 'Diamond', 'Sapphire'];
+    List<String> gemTypes = ['Emerald', 'Ruby', 'Launchpad', 'Sapphire'];
     List<Map<String, dynamic>> allScores = [];
 
     for (String gemType in gemTypes) {
@@ -152,7 +152,7 @@ class ScoreStorage {
     print("Found ${scores.length} scores to migrate");
 
     // Split scores among gem types
-    List<String> gemTypes = ['Emerald', 'Ruby', 'Diamond', 'Sapphire'];
+    List<String> gemTypes = ['Emerald', 'Ruby', 'Launchpad', 'Sapphire'];
 
     for (int i = 0; i < scores.length; i++) {
       var score = scores[i];
@@ -180,7 +180,7 @@ class ScoreStorage {
     await storage!.delete(key: 'saved_scores');
 
     // Clear gem-specific scores
-    for (String gemType in ['Emerald', 'Ruby', 'Diamond', 'Sapphire']) {
+    for (String gemType in ['Emerald', 'Ruby', 'Launchpad', 'Sapphire']) {
       await storage!.delete(key: 'gem_${gemType.toLowerCase()}');
     }
 

@@ -81,8 +81,8 @@ class QuizQuestionsController extends GetxController {
         case 'ruby':
           quizPath = 'start-game-ruby-mode';
           break;
-        case 'diamond':
-          quizPath = 'start-game-diamond-mode';
+        case 'launchpad':
+          quizPath = 'start-game-launchpad-mode';
           break;
         case 'sapphire':
           quizPath = 'start-game-sapphire-mode';
