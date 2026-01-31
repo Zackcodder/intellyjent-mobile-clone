@@ -8,7 +8,8 @@ class TellyBucks extends StatefulWidget {
 }
 
 class _TellyBucksState extends State<TellyBucks> {
-  final Uri _urlDashboard = Uri.parse('https://tellybucks.intellyjent.com/login');
+  final Uri _urlDashboard =
+      Uri.parse('https://tellybucks.intellyjent.com/login');
 
   Future<void> _launchDashboard() async {
     if (!await launchUrl(_urlDashboard)) {
@@ -21,17 +22,17 @@ class _TellyBucksState extends State<TellyBucks> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     var bio =
-        "Tellybucks is a referral program aimed at empowering you financially. When your friends sign up with your referral code, you earn 10% of their spending on the App - every time they spend, you get paid. You can transfer your earnings to your bank account anytime. It’s that easy!";
+        "Tellybucks is a referral program aimed at empowering you financially. When your friends sign up with your referral code, you earn 2% of their spending on the App - every time they spend, you get paid. You can transfer your earnings to your bank account anytime. It’s that easy!";
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
-        toolbarHeight: screenHeight < 670 ? 60 :  90,
+        toolbarHeight: screenHeight < 670 ? 60 : 90,
         automaticallyImplyLeading: false,
         title: const HeaderWidget(title: 'Tellybucks'),
       ),
       body: Padding(
-        padding: MediaQuery.of(context).size.width <800
+        padding: MediaQuery.of(context).size.width < 800
             ? const EdgeInsets.symmetric(horizontal: 20)
             : const EdgeInsets.symmetric(horizontal: 40),
         child: LayoutBuilder(
@@ -56,8 +57,9 @@ class _TellyBucksState extends State<TellyBucks> {
                                 textAlign: TextAlign.center,
                               ),
                               Padding(
-                                padding:
-                                screenHeight < 670 ? EdgeInsets.zero :  const EdgeInsets.symmetric(vertical: 20),
+                                padding: screenHeight < 670
+                                    ? EdgeInsets.zero
+                                    : const EdgeInsets.symmetric(vertical: 20),
                                 child: ButtonWidget(
                                   buttonText: '',
                                   fontSize: 17,
@@ -66,7 +68,9 @@ class _TellyBucksState extends State<TellyBucks> {
                                   backgroundColor:
                                       const MaterialStatePropertyAll(
                                           AppColor.appColor),
-                                  onPressed: () => Get.to(()=> const TellyBucksDashboardPage(), transition: Transition.upToDown),
+                                  onPressed: () => Get.to(
+                                      () => const TellyBucksDashboardPage(),
+                                      transition: Transition.upToDown),
                                   // onPressed: () => _launchDashboard(),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -91,13 +95,17 @@ class _TellyBucksState extends State<TellyBucks> {
                                       SvgPicture.asset(Assets.assetsTelegram)),
                             ],
                           )),
-                          screenHeight < 670 ? AppSizing.h04 : SizedBox(
-                              height: MediaQuery.of(context).size.height <
-                                          705 ||
-                                      MediaQuery.of(context).viewInsets.bottom >
-                                          0
-                                  ? 40
-                                  : 0),
+                          screenHeight < 670
+                              ? AppSizing.h04
+                              : SizedBox(
+                                  height: MediaQuery.of(context).size.height <
+                                              705 ||
+                                          MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom >
+                                              0
+                                      ? 40
+                                      : 0),
                           screenHeight < 670 ? AppSizing.h04 : AppSizing.h28,
                           Column(
                             children: [
@@ -177,7 +185,7 @@ Widget _buildShare(
         required String label,
         required Widget icon}) =>
     InkWell(
-      onTap: ()=> _launchTelegram(),
+      onTap: () => _launchTelegram(),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
