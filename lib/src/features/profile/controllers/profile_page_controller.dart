@@ -9,14 +9,14 @@ class ProfilePageController extends GetxController {
 
   ///game mode
   var gems = <Gem>[
-    Gem(name: 'Launchpad', imagePath: 'assets/images/diamond.png'),
+    Gem(name: 'Diamond', imagePath: 'assets/images/diamond.png'),
     Gem(name: 'Ruby', imagePath: 'assets/images/ruby.png'),
     Gem(name: 'Emerald', imagePath: 'assets/images/emerald.png'),
     Gem(name: 'Sapphire', imagePath: 'assets/images/sapphire.png'),
   ];
 
   var selectedGem =
-      Gem(name: 'Launchpad', imagePath: 'assets/images/diamond.png').obs;
+      Gem(name: 'Diamond', imagePath: 'assets/images/diamond.png').obs;
 
   void setSelectedGem(Gem gem) {
     selectedGem.value = gem;

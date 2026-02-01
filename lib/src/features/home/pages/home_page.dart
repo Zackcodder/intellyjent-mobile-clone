@@ -239,7 +239,7 @@ class HomePage extends StatelessWidget {
                                                         .toStringAsFixed(0)
                                                     : controller.selectedGem
                                                                 .value.name ==
-                                                            'Launchpad'
+                                                            'Diamond'
                                                         ? diamondGameScore
                                                             .toStringAsFixed(0)
                                                         : controller

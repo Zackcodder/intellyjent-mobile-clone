@@ -55,7 +55,7 @@ class LeaderboardPage extends StatelessWidget {
                               await controller.getLeaderBoardData();
                             },
                             child: Text(
-                              'Last ${cnt.selectedGem.value.name == 'Emerald' ? "Month’s" : cnt.selectedGem.value.name == 'Launchpad' ? "Year’s" : cnt.selectedGem.value.name == 'Ruby' ? "Quarter’s " : "Week’s"} Champions',
+                              'Last ${cnt.selectedGem.value.name == 'Emerald' ? "Month’s" : cnt.selectedGem.value.name == 'Diamond' ? "Year’s" : cnt.selectedGem.value.name == 'Ruby' ? "Quarter’s " : "Week’s"} Champions',
                               style: AppTextStyle.h4Regular(context),
                             ),
                           ),
@@ -94,7 +94,7 @@ class LeaderboardPage extends StatelessWidget {
                   children: [
                     AppSizing.h28,
                     Text(
-                      'This ${cnt.selectedGem.value.name == 'Emerald' ? "Month’s" : cnt.selectedGem.value.name == 'Launchpad' ? "Year’s" : cnt.selectedGem.value.name == 'Ruby' ? "Quarter’s " : "Week’s"} Leaderboard',
+                      'This ${cnt.selectedGem.value.name == 'Emerald' ? "Month’s" : cnt.selectedGem.value.name == 'Diamond' ? "Year’s" : cnt.selectedGem.value.name == 'Ruby' ? "Quarter’s " : "Week’s"} Leaderboard',
                       style: AppTextStyle.h4Regular(context)
                           .copyWith(fontSize: 18),
                     ),
@@ -102,7 +102,7 @@ class LeaderboardPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
-                        'Earn as much points in the quiz and rise to the top of this ${cnt.selectedGem.value.name == 'Emerald' ? "month’s" : cnt.selectedGem.value.name == 'Launchpad' ? "year’s" : cnt.selectedGem.value.name == 'Ruby' ? "quarter’s " : "week’s"} leaderboard ',
+                        'Earn as much points in the quiz and rise to the top of this ${cnt.selectedGem.value.name == 'Emerald' ? "month’s" : cnt.selectedGem.value.name == 'Diamond' ? "year’s" : cnt.selectedGem.value.name == 'Ruby' ? "quarter’s " : "week’s"} leaderboard ',
                         style: AppTextStyle.bodyMedium(context),
                         textAlign: TextAlign.center,
                       ),
