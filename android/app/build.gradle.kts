@@ -36,8 +36,8 @@ android {
     defaultConfig {
         applicationId = "com.intellyjent.intellyjent"
         minSdk = flutter.minSdkVersion
-        targetSdk = 34
-        versionCode = 55
+        targetSdk = 35
+        versionCode = 56
         versionName = "4.9.8"
     }
 
