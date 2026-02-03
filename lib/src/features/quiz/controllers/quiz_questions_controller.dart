@@ -81,7 +81,7 @@ class QuizQuestionsController extends GetxController {
         case 'ruby':
           quizPath = 'start-game-ruby-mode';
           break;
-        case 'diamond':
+        case 'launchpad':
           quizPath = 'start-game-diamond-mode';
           break;
         case 'sapphire':
@@ -114,7 +114,7 @@ class QuizQuestionsController extends GetxController {
 
           final List<String> categories = categorySequence();
           final List<String> difficulties =
-              difficultySequence(39); // you can change total here
+              difficultySequence(181); // you can change total here
 
           int addedCount = 0;
 
@@ -283,11 +283,11 @@ class QuizQuestionsController extends GetxController {
     while (questionCounter <= totalQuestions) {
       if (questionCounter <= 5) {
         sequence.add('easy');
-      } else if (questionCounter <= 10) {
+      } else if (questionCounter <= 40) {
         sequence.add('moderate');
-      } else if (questionCounter <= 15) {
+      } else if (questionCounter <= 40) {
         sequence.add('easy');
-      } else if (questionCounter <= 20) {
+      } else if (questionCounter <= 40) {
         sequence.add('moderate');
       } else {
         sequence.add('difficult');

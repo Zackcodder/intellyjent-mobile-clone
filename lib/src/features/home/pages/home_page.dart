@@ -239,7 +239,7 @@ class HomePage extends StatelessWidget {
                                                         .toStringAsFixed(0)
                                                     : controller.selectedGem
                                                                 .value.name ==
-                                                            'Diamond'
+                                                            'Launchpad'
                                                         ? diamondGameScore
                                                             .toStringAsFixed(0)
                                                         : controller
@@ -381,7 +381,7 @@ class HomePage extends StatelessWidget {
                               '• This quiz mode costs 3 sillver.',
                               style: AppTextStyle.bodySmallLight(context),
                             )
-                          : controller.selectedGem.value.name == 'Diamond'
+                          : controller.selectedGem.value.name == 'Launchpad'
                               ? Text(
                                   '• This quiz mode costs 5 sillver.',
                                   style: AppTextStyle.bodySmallLight(context),

@@ -2,7 +2,7 @@
 class GemTypes {
   static const String emerald = 'Emerald';
   static const String ruby = 'Ruby';
-  static const String diamond = 'Diamond';
+  static const String diamond = 'Launchpad';
   static const String sapphire = 'Sapphire';
 
   // Helper method to check if a string is a valid gem type

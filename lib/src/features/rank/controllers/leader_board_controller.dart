@@ -47,7 +47,7 @@ class LeaderBoardController extends GetxController {
       case 'ruby':
         leaderboardPath = 'ruby-leaderboard';
         break;
-      case 'diamond':
+      case 'launchpad':
         leaderboardPath = 'diamond-leaderboard';
         break;
       case 'sapphire':
@@ -78,7 +78,7 @@ class LeaderBoardController extends GetxController {
       case 'ruby':
         winnerPath = 'bookchamp/winners/ruby/';
         break;
-      case 'diamond':
+      case 'launchpad':
         winnerPath = 'bookchamp/winners/diamond/';
         break;
       case 'sapphire':
