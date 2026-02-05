@@ -1,4 +1,3 @@
-
 import '../../../core/core.dart';
 
 class HelpAndSupportController extends GetxController {
@@ -26,11 +25,12 @@ class HelpAndSupportController extends GetxController {
 
   final List<String> questions = [
     'Is Intellyjent free for download or it’s a paid App?',
-    'Are there cash rewards for the Quiz?',
+    'What are the requirements for admission into the launchpad program',
+    // 'Are there cash rewards for the Quiz?',
     'Is the Quiz platform free?',
     'Do top-up plans expire?',
-    'When are winners selected?',
-    'How are winners paid?',
+    // 'When are winners selected?',
+    // 'How are winners paid?',
     'How many Sillver do I need to play a Quiz?',
     'How secure is the payment system for Top-ups?',
     'Do I get charged when I withdraw my commission?',
@@ -41,11 +41,12 @@ class HelpAndSupportController extends GetxController {
 
   final List<String> answers = [
     'Intellyjent is free and it’s available for download on the Google Play Store.',
-    'Yes, we reward brilliance; you can find the cash prize on our website – www.intellyjent.com',
+    'To get all information, visit www.intellyjent.com/launchpad',
+    // 'Yes, we reward brilliance; you can find the cash prize on our website – www.intellyjent.com',
     'No. To gain access to the Quiz platform, you’ll need to top up your wallet to get Sillver. Sillver gives you access to play the quiz. New sign-ups are credited with 2 free Sillver.',
     'No, there is no fixed expiry period.',
-    'Refer to the FAQs section of our website – www.intellyjent.com',
-    'Winners are required to register their bank account details under Tellybucks to receive their cash prize.\n\nWinners outside Nigeria will receive a mail from support@intellyjent.com with details on how to receive their cash prize.',
+    // 'Refer to the FAQs section of our website – www.intellyjent.com',
+    // 'Winners are required to register their bank account details under Tellybucks to receive their cash prize.\n\nWinners outside Nigeria will receive a mail from support@intellyjent.com with details on how to receive their cash prize.',
     'Refer to the FAQs section of our website – www.intellyjent.com',
     'Your payment details are encrypted with cutting-edge technology.',
     'Yes. You’re charged ₦25; deducted from your balance.',

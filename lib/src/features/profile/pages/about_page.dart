@@ -25,7 +25,7 @@ class _AboutPageState extends State<AboutPage> {
         "Intellyjent is an e-learning platform that tackles this challenge by turning learning into a game. A meta-analysis by Clark & Mayer (2014) found that educational games led to a moderate gain in student achievement across various subjects and age groups. Specifically, students using games scored 8% higher on assessments compared to traditional methods.\n\n"
         "Intellyjent uses gamified learning and performance-based incentives to help youths build critical cognitive and in-demand skills and connect them to global job opportunities through our HR Partners.\n\n"
         "We use incentives to drive consistent engagement and skill development. Our Gamification approach transforms passive learning into an active, rewarding experience.\n\n"
-        "By merging skill building, motivation and employability, we're creating a pathway for a new generation to emerge - a knowledge-based generation.";
+        "By merging skill building, motivation and employability, we’re creating a pathway for a new generation to emerge - a knowledge-based generation.\n\n";
 
     final mediaQuery = MediaQuery.of(context);
     final screenWidth = mediaQuery.size.width;

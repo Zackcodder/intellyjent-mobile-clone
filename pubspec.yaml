@@ -69,7 +69,14 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   flutter_tts: ^4.0.2
   device_info_plus: ^11.2.2
+  flutter_launcher_icons: ^0.14.4
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/intellyjent_logo.png"
+  adaptive_icon_foreground: "assets/images/intellyjent_logo.png"
+  min_sdk_android: 21 
 dev_dependencies:
   flutter_test:
     sdk: flutter
