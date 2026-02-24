@@ -37,8 +37,8 @@ android {
         applicationId = "com.intellyjent.intellyjent"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 58
-        versionName = "5.0.0"
+        versionCode = 59
+        versionName = "5.0.1"
     }
 
     signingConfigs {

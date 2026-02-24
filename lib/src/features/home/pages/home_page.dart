@@ -408,7 +408,23 @@ class HomePage extends StatelessWidget {
                       borderSideColor: Colors.transparent,
                       textColor: AppColor.white,
                       onPressed: () {
-                        if ((controller.userData.value?.points ?? 0) > 0) {
+                        // Determine the cost based on the selected quiz mode
+                        int silverCost = 0;
+                        if (controller.selectedGem.value.name == 'Emerald') {
+                          silverCost = 3;
+                        } else if (controller.selectedGem.value.name ==
+                            'Launchpad') {
+                          silverCost = 5;
+                        } else if (controller.selectedGem.value.name ==
+                            'Ruby') {
+                          silverCost = 4;
+                        } else if (controller.selectedGem.value.name ==
+                            'Sapphire') {
+                          silverCost = 2;
+                        }
+
+                        if ((controller.userData.value?.points ?? 0) >=
+                            silverCost) {
                           Get.offAll(() => const QuizQuestionsPage());
                         } else {
                           Get.dialog(
@@ -421,7 +437,8 @@ class HomePage extends StatelessWidget {
                               child: PopScope(
                                 canPop: false,
                                 child: AppDialog(
-                                  msg: 'Sorry 😢, you are out of Silver',
+                                  msg:
+                                      'Sorry 😢, you don\'t have enough sillver',
                                   buttonText: 'Top up',
                                   // height: 231,
                                   onTap: () {

@@ -4,5 +4,6 @@
   "flutterTools.displayMobxContextMenu": false,
   "flutterTools.displayRiverpodContextMenu": false,
   "flutterTools.displayModularContextMenu": false,
-  "dart.flutterSdkPath": ".fvm/versions/3.38.8"
+  "dart.flutterSdkPath": ".fvm/versions/3.38.8",
+  "cmake.sourceDirectory": "/Users/macbookair/Documents/Personal/intellyjent-mobile-clone/linux"
 }
