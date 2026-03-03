@@ -94,7 +94,7 @@ class LeaderboardPage extends StatelessWidget {
                   children: [
                     AppSizing.h28,
                     Text(
-                      'This ${cnt.selectedGem.value.name == 'Emerald' ? "Month’s" : cnt.selectedGem.value.name == 'Launchpad' ? "Year’s" : cnt.selectedGem.value.name == 'Ruby' ? "Quarter’s " : "Week’s"} Leaderboard',
+                      ' ${cnt.selectedGem.value.name == 'Emerald' ? "This Month’s" : cnt.selectedGem.value.name == 'Launchpad' ? "Applicant’s" : cnt.selectedGem.value.name == 'Ruby' ? "This Quarter’s " : "This Week"} Leaderboard',
                       style: AppTextStyle.h4Regular(context)
                           .copyWith(fontSize: 18),
                     ),
@@ -102,7 +102,8 @@ class LeaderboardPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
-                        'Earn as much points in the quiz and rise to the top of this ${cnt.selectedGem.value.name == 'Emerald' ? "month’s" : cnt.selectedGem.value.name == 'Launchpad' ? "year’s" : cnt.selectedGem.value.name == 'Ruby' ? "quarter’s " : "week’s"} leaderboard ',
+                        'Earn as many points in the quiz and rise to the top of the leaderboard.',
+                        // 'Earn as much points in the quiz and rise to the top of this ${cnt.selectedGem.value.name == 'Emerald' ? "month’s" : cnt.selectedGem.value.name == 'Launchpad' ? "year’s" : cnt.selectedGem.value.name == 'Ruby' ? "quarter’s " : "week’s"} leaderboard ',
                         style: AppTextStyle.bodyMedium(context),
                         textAlign: TextAlign.center,
                       ),

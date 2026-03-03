@@ -377,23 +377,47 @@ class HomePage extends StatelessWidget {
                       ),
                       AppSizing.h04,
                       controller.selectedGem.value.name == 'Emerald'
-                          ? Text(
-                              '• This quiz mode costs 3 sillver.',
-                              style: AppTextStyle.bodySmallLight(context),
-                            )
-                          : controller.selectedGem.value.name == 'Launchpad'
-                              ? Text(
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
                                   '• This quiz mode costs 5 sillver.',
                                   style: AppTextStyle.bodySmallLight(context),
+                                ),
+                                Text(
+                                  '• The top 50 candidates advance at 6 p.m. (WAT) on the last day of each month. See the FAQs for details.',
+                                  style: AppTextStyle.bodySmallLight(context),
+                                ),
+                                Text(
+                                  '• Cash Prize: Winner: ₦40,000 | Runner-up: ₦10,000.',
+                                  style: AppTextStyle.bodySmallLight(context),
+                                ),
+                              ],
+                            )
+                          : controller.selectedGem.value.name == 'Launchpad'
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '• This quiz mode costs 5 sillver.',
+                                      style:
+                                          AppTextStyle.bodySmallLight(context),
+                                    ),
+                                    Text(
+                                      '• Application closes: 30th of April, 2026. 6 p.m. (WAT).',
+                                      style:
+                                          AppTextStyle.bodySmallLight(context),
+                                    ),
+                                  ],
                                 )
                               : controller.selectedGem.value.name == 'Ruby'
                                   ? Text(
-                                      '• This quiz mode costs 4 sillver.',
+                                      '• This quiz mode costs 5 sillver.',
                                       style:
                                           AppTextStyle.bodySmallLight(context),
                                     )
                                   : Text(
-                                      '• This quiz mode costs 2 sillver.',
+                                      '• This quiz mode costs 5 sillver.',
                                       style:
                                           AppTextStyle.bodySmallLight(context),
                                     ),

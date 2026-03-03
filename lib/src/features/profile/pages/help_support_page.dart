@@ -15,7 +15,7 @@ class HelpAndSupport extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title:
-        const HeaderWidget(title: 'Help & Support', showBackButton: true),
+            const HeaderWidget(title: 'Help & Support', showBackButton: true),
         automaticallyImplyLeading: false,
         toolbarHeight: screenHeight < 670 ? 60 : 90,
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -24,102 +24,139 @@ class HelpAndSupport extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: screenWidth,
-          padding: MediaQuery.of(context).size.width <800
+          padding: MediaQuery.of(context).size.width < 800
               ? const EdgeInsets.symmetric(horizontal: 20, vertical: 41)
               : const EdgeInsets.symmetric(horizontal: 40, vertical: 51),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('We are here to help and assist you. Please send us a mail.',
+              Text(
+                'We are here to help and assist you. Please send us a mail.',
                 style: AppTextStyle.h5(context),
               ),
               AppSizing.h24,
               InkWell(
-                onTap: ()=> Get.to(()=> const MessageUsPage(), transition: Transition.upToDown),
+                  onTap: () => Get.to(() => const MessageUsPage(),
+                      transition: Transition.upToDown),
                   child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 42,
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                          color: Color(0xFFECF0FC),
-                          shape: BoxShape.circle,
+                      Row(children: [
+                        Container(
+                          width: 42,
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFECF0FC),
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset('Message-Text'.isvg),
                         ),
-                        child: SvgPicture.asset('Message-Text'.isvg),
-                      ),
-                      AppSizing.w16,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Inbox', style: AppTextStyle.bodySmallLight(context),),
-                          Text('Send us a quick message', style: AppTextStyle.bodySmallLight(context).copyWith(
-                            color: AppColor.grey200
-                          ),),
-                        ],
-                      )
-                    ]
-                  ),
-                  SvgPicture.asset(Assets.assetsArrowRightCurved, colorFilter: ColorFilter.mode(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? AppColor.grey200 : AppColor.grey400,
-                    BlendMode.srcIn, ))
-                ],
-              )),
+                        AppSizing.w16,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Inbox',
+                              style: AppTextStyle.bodySmallLight(context),
+                            ),
+                            Text(
+                              'Send us a quick message',
+                              style: AppTextStyle.bodySmallLight(context)
+                                  .copyWith(color: AppColor.grey200),
+                            ),
+                          ],
+                        )
+                      ]),
+                      SvgPicture.asset(Assets.assetsArrowRightCurved,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).brightness == Brightness.dark
+                                ? AppColor.grey200
+                                : AppColor.grey400,
+                            BlendMode.srcIn,
+                          ))
+                    ],
+                  )),
               AppSizing.h42,
               Row(
                 children: [
-                  Text('FAQ', style: AppTextStyle.h5(context),),
+                  Text(
+                    'FAQ',
+                    style: AppTextStyle.h5(context),
+                  ),
                 ],
               ),
               AppSizing.h12,
+
+              ///questions and answers
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: ctl.questions.length,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return FAQTile(index: index, helpAndSupportController: ctl,);
+                  return FAQTile(
+                    index: index,
+                    helpAndSupportController: ctl,
+                  );
                 },
               ),
+
+              ///failed top ups
               Row(
                 children: [
-                  Text('FAILED TOP-UPS', style: AppTextStyle.h5(context),),
+                  Text(
+                    'FAILED TOP-UPS',
+                    style: AppTextStyle.h5(context),
+                  ),
                 ],
               ),
               AppSizing.h12,
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text.rich(
-                  TextSpan(
-                    text: 'If you didn’t get your Sillver after payment, please kindly fill out this ',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'If you’re paying by bank transfer and you successfully transferred the money but didn’t finish the process on the App for some reason, your Sillver is automatically credited to your account in this instance. Close the App and open it again, you will see your Sillver.',
                     style: AppTextStyle.bodySmallHeavy(context),
-                    children: [
-                      TextSpan(
-                        text: '(form)',
-                        style: const TextStyle(
-                          color: AppColor.appColor,
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.none,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            ctl.launchTopUp();
-                          },
-                      ),
-                      TextSpan(
-                        text: ' and it will be resolved. Thank you.',
-                        style: AppTextStyle.bodySmallHeavy(context),
-                      ),
-                    ],
                   ),
-                ),
+                  AppSizing.h12,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text.rich(
+                      TextSpan(
+                        text:
+                            'If you didn’t get your Sillver after payment, please kindly fill out this ',
+                        style: AppTextStyle.bodySmallHeavy(context),
+                        children: [
+                          TextSpan(
+                            text: '(form)',
+                            style: const TextStyle(
+                              color: AppColor.appColor,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                ctl.launchTopUp();
+                              },
+                          ),
+                          TextSpan(
+                            text: ' and it will be resolved. Thank you.',
+                            style: AppTextStyle.bodySmallHeavy(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               AppSizing.h24,
+
+              ///feed back
               Row(
                 children: [
-                  Text('FEEDBACK', style: AppTextStyle.h5(context),),
+                  Text(
+                    'FEEDBACK',
+                    style: AppTextStyle.h5(context),
+                  ),
                 ],
               ),
               AppSizing.h12,
