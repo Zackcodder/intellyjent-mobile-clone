@@ -435,16 +435,16 @@ class HomePage extends StatelessWidget {
                         // Determine the cost based on the selected quiz mode
                         int silverCost = 0;
                         if (controller.selectedGem.value.name == 'Emerald') {
-                          silverCost = 3;
+                          silverCost = 5;
                         } else if (controller.selectedGem.value.name ==
                             'Launchpad') {
                           silverCost = 5;
                         } else if (controller.selectedGem.value.name ==
                             'Ruby') {
-                          silverCost = 4;
+                          silverCost = 5;
                         } else if (controller.selectedGem.value.name ==
                             'Sapphire') {
-                          silverCost = 2;
+                          silverCost = 5;
                         }
 
                         if ((controller.userData.value?.points ?? 0) >=
